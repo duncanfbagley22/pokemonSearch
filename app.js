@@ -8,6 +8,28 @@ let initialPokemon = {
     img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
 }
 
+
+
+let storedSearchList = localStorage.getItem('searchedPokemon');
+let searchList = document.getElementById('searches');
+
+if (storedSearchList) {
+    console.log("local storage has a value");
+    storedSearchList = JSON.parse(storedSearchList)
+} else {
+    storedSearchList = ['Charizard'];
+    localStorage.setItem('searchedPokemon', JSON.stringify(storedSearchList));
+}
+
+function initialUpdate(item){
+    let li = document.createElement("li");
+    li.innerText = item.charAt(0).toUpperCase()+item.slice(1).toLowerCase();
+    searchList.prepend(li);
+};
+
+storedSearchList.reverse().forEach(initialUpdate);
+
+
 const typeColors = [
     ['Normal', '#AAB09F'],
     ['Fire', '#EA7A3C'],
@@ -73,7 +95,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.types[1] == null) {pokemonTypeTwo.textContent = 'N/A'; pokemonTypeTwo.style.backgroundColor = 'white'} else {
             pokemonTypeTwo.textContent = data.types[1].type.name.charAt(0).toUpperCase()+data.types[1].type.name.slice(1).toLowerCase();
             pokemonTypeTwo.style.backgroundColor = getColorForType(data.types[1].type.name.charAt(0).toUpperCase()+data.types[1].type.name.slice(1).toLowerCase());}
-        console.log(audioSource.src)
+            
+            storedSearchList.unshift(data.name.charAt(0).toUpperCase()+data.name.slice(1).toLowerCase());
+            localStorage.setItem('searchedPokemon', JSON.stringify(storedSearchList));
+
+            let li = document.createElement("li");
+            li.innerText = newPokemonButton.charAt(0).toUpperCase()+newPokemonButton.slice(1).toLowerCase();
+            searchList.prepend(li);
         })
         .catch(error => console.error('Error fetching data:', error));
     });

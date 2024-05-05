@@ -257,3 +257,67 @@ input{
     font-size: 14px;
     text-align: center;
 }
+
+.left-side-nav{
+    background-color: var(--secondarybackgroundcolor);
+    height: 95%;
+    position: fixed;
+    font-size: 20px;
+    text-wrap: nowrap;
+    border: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    top: 2%;
+    bottom: 2%;
+    left: 1%;
+    width: 12%;
+    text-align: center;
+}
+
+.left-side-nav li{
+    list-style: none;
+    padding-top: 10px;
+    text-align: left;
+}
+
+.left-side-nav a{
+    text-decoration: none;
+    color: gray;
+}
+
+.left-side-nav a:hover{
+    cursor: pointer;
+    color: var(--buttonhighlightcolor);
+}
+
+.nav-text{
+    padding-top: 10px;
+}
+
+.right-side-bar{
+    background-color: var(--secondarybackgroundcolor);
+    height: 95%;
+    position: fixed;
+    font-size: 20px;
+    border: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    top: 2%;
+    bottom: 2%;
+    right: 1%;
+    width: 12%;
+    text-align: center;
+}
+
+
+.right-side-bar ul{
+    list-style: none;
+    padding-top: 0px;
+    text-align: left;
+    padding-left: 10pt;
+    font-size: 14px;
+}
+
+.right-side-bar li{
+    padding-top: 3px;
+}
