@@ -124,3 +124,12 @@ playSoundButton.addEventListener("click", function() {
         audioPlayer.play();
         console.log(audioSource.src)
 });
+
+
+let clearButton = document.getElementById('clearButton');
+
+clearButton.addEventListener("click", function () {
+    localStorage.clear();
+    document.getElementById("searches").innerHTML = "";
+    console.log('buttonclicked')
+});
