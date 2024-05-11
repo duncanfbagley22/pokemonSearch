@@ -102,6 +102,7 @@ input{
     height: 50%;
     border-style: solid;
     align-content: center;
+    justify-content: center;
 }
 
 .pokemon-picture img{
@@ -367,6 +368,10 @@ input{
     }
     .randomizer{
         left: 75%;
+    }
+    .pokemon-picture img{
+        height: auto;
+        width: 85%;
     }
 
 }
