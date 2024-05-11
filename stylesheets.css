@@ -67,8 +67,8 @@ body{
     position: relative;
     width: 40%;
     top: 5%;
-    left: 30%;
-    right: 30%;
+    left: 50%;
+    transform: translateX(-50%);
     height: 50%;
     border-style: solid;
     align-content: center;
@@ -170,7 +170,7 @@ input{
     position: fixed;
     background: none;
     top: 18px;
-    left: 5%;
+    left: clamp(10px, 10px, 5%);
     font-size: 24px;
     display: none;
 }
