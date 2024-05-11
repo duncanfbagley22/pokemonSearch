@@ -6,6 +6,9 @@
     --buttonhighlightcolor: #a6eefb;
     --type1color: #EA7A3C;
     --type2color: #7DA6DE;
+    --centralWidth: 512px;
+    --itemWidth: 132px;
+    --itemHeight: 30px;
 }
 
 
@@ -13,6 +16,8 @@
     font-family: 'Courier New', Courier, monospace;
     color: black;
     text-align: center;
+    border-radius: 5px;
+    border: 2px;
 }
 
 body{
@@ -21,15 +26,13 @@ body{
 
 .title{
     background-color: var(--secondarybackgroundcolor);
-    position: fixed;
-    width: 40%;
-    top: 8%;
-    left: 30%;
-    right: 30%;
+    position: relative;
+    width: var(--centralWidth);
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 36px;
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-weight: bold;
 }
@@ -37,28 +40,24 @@ body{
 .info-container{
     background-color: var(--secondarybackgroundcolor);
     position: fixed;
-    width: 40%;
-    top: 18%;
-    left: 30%;
-    right: 30%;
-    height: 60%;
+    width: var(--centralWidth);
+    top: 117px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 379px;
     font-size: 36px;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
 }
 
 .button-container{
     background-color: var(--secondarybackgroundcolor);
     position: fixed;
-    width: 40%;
-    top: 81.5%;
-    left: 30%;
-    right: 30%;
-    height: 10%;
+    width: var(--centralWidth);
+    top: 514px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 64px;
     font-size: 36px;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
 }
 
@@ -70,8 +69,6 @@ body{
     left: 30%;
     right: 30%;
     height: 50%;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     align-content: center;
 }
@@ -83,32 +80,28 @@ body{
 
 .pokemon-name{
     background-color: var(--terciarybackgroundcolor);
-    position: fixed;
-    width: 10%;
-    top: 54%;
-    left: 45%;
-    right: 45%;
-    height: 5%;
+    position: relative;
+    width: calc(var(--itemWidth)*1.1);
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 20px;
     align-content: center;
     font-weight: bold;
+    height: var(--itemHeight);
 }
 
 .type-1{
     background-color: var(--type1color);
-    position: fixed;
-    width: 10%;
-    top: 62%;
-    left: 37%;
-    right: 45%;
-    height: 5%;
+    position: relative;
+    width: var(--itemWidth);
+    top: 46px;
+    left: 30%;
+    transform: translateX(-50%);
+    height: var(--itemHeight);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 20px;
     align-content: center;
@@ -118,14 +111,12 @@ body{
 .type-2{
     background-color: var(--type2color);
     position: fixed;
-    width: 10%;
-    top: 70%;
-    left: 37%;
-    right: 45%;
-    height: 5%;
+    width: var(--itemWidth);
+    top: 321px;
+    left: 30%;
+    transform: translateX(-50%);
+    height: var(--itemHeight);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 20px;
     align-content: center;
@@ -133,12 +124,11 @@ body{
 }
 
 input{
-    width: 20%;
-    height: 5%;
-    top: 83.9%;
-    left: 31.5%;
+    height: var(--itemHeight);
+    width: calc(var(--itemWidth)*1.75);
+    left: 5%;
+    top: 14px;
     position: fixed;
-    border-radius: 5px;
     border-style: solid;
     font-size: 14px;
 }
@@ -149,13 +139,11 @@ input{
     position: fixed;
     font-size: 20px;
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     top: 2%;
     bottom: 2%;
     left: 1%;
-    width: 12%;
+    width: 154px;
 }
 
 .left-side-nav li{
@@ -183,13 +171,10 @@ input{
     height: 95%;
     position: fixed;
     font-size: 20px;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     top: 2%;
-    bottom: 2%;
     right: 1%;
-    width: 12%;
+    width: 154px;
 }
 
 .right-side-bar ul{
@@ -207,40 +192,21 @@ input{
 
 /* BUTTONS */
 
-button{
-    background: none;
-    border-style: none;
-    align-content: center;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-button:hover{
-    opacity: 90%;
-    background: var(--buttonhighlightcolor);
-    cursor: pointer;
-}
-
 .external-info-button{
     background: none;
     background-color: var(--buttonbackgroundcolor);
     position: fixed;
-    width: 10%;
-    top: 70%;
-    left: 53%;
-    right: 47%;
-    height: 5%;
+    width: var(--itemWidth);
+    top: 321px;
+    left: 70%;
+    transform: translateX(-50%);
+    height: var(--itemHeight);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 20px;
     align-content: center;
     justify-items: center;
-}
-
-.external-info-button button{
-    padding: 0%;
+    font-weight: bold;
 }
 
 .external-info-button:hover{
@@ -254,23 +220,18 @@ button:hover{
     background: none;
     background-color: var(--buttonbackgroundcolor);
     position: fixed;
-    width: 15%;
-    top: 84%;
-    left: 53%;
-    right: 47%;
-    height: 5%;
+    width: calc(var(--itemWidth)*1.5);
+    top: 23%;
+    left: 75%;
+    transform: translateX(-50%);
+    height: var(--itemHeight);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 14px;
     align-content: center;
+    font-weight: bold;
 }
 
-.input-button button{
-    align-content: center;
-    font-size: 14px;
-}
 
 .input-button:hover{
     opacity: 90%;
@@ -279,23 +240,18 @@ button:hover{
 }
 
 .clear-button {
-    background: none;
     background-color: var(--buttonbackgroundcolor);
-    position: fixed;
-    width: 10%;
-    top: 89%;
-    left: 87.75%;
-    right: 5%;
-    height: 6%;
+    position: absolute;
+    width: var(--itemWidth);
+    right: 10px;
+    bottom: 16px;
+    height: var(--itemHeight);
     text-wrap: wrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     align-content: center;
-}
-
-.clear-button button{
-    font-size: 12px;
+    font-size: 13px;
+    display: block;
+    font-weight: bold;
 }
 
 .clear-button:hover{
@@ -307,20 +263,41 @@ button:hover{
 .play-cry-button{
     background-color: var(--buttonbackgroundcolor);
     position: fixed;
-    width: 10%;
-    top: 62%;
-    left: 53%;
-    right: 47%;
-    height: 5%;
+    width: var(--itemWidth);
+    top: 273px;
+    left: 70%;
+    transform: translateX(-50%);
+    height: var(--itemHeight);
     text-wrap: nowrap;
-    border: 2px;
-    border-radius: 5px;
     border-style: solid;
     font-size: 20px;
     align-content: center;
+    font-weight: bold;
 }
 
 .play-cry-button:hover{
+    opacity: 90%;
+    background: var(--buttonhighlightcolor);
+    cursor: pointer;
+}
+
+.randomizer{
+    border-style: solid;
+    height: var(--itemHeight);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 22px;
+    width: 35px;
+    position: relative;
+    background-color: var(--buttonbackgroundcolor);
+    top: -38px;
+    left: 70%;
+    transform: translateX(-50%);
+    display:flex;
+}
+
+.randomizer:hover{
     opacity: 90%;
     background: var(--buttonhighlightcolor);
     cursor: pointer;

@@ -130,6 +130,35 @@ let clearButton = document.getElementById('clearButton');
 
 clearButton.addEventListener("click", function () {
     localStorage.clear();
+    storedSearchList = [];
     document.getElementById("searches").innerHTML = "";
     console.log('buttonclicked')
+});
+
+const randomButton = document.getElementById('randomizer-button')
+
+document.addEventListener("DOMContentLoaded", function() {
+    randomButton.addEventListener("click", function() {
+        let randomNumber = Math.floor(Math.random()*1026)
+        fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}/`)
+        .then(response => response.json())
+        .then(data => {
+            pokemonImg.src = data.sprites.front_default;
+            pokemonName.textContent = data.name.charAt(0).toUpperCase()+data.name.slice(1).toLowerCase();
+            pokemonTypeOne.textContent = data.types[0].type.name.charAt(0).toUpperCase()+data.types[0].type.name.slice(1).toLowerCase();
+            pokemonTypeOne.style.backgroundColor = getColorForType(data.types[0].type.name.charAt(0).toUpperCase()+data.types[0].type.name.slice(1).toLowerCase());
+            audioSource.src = data.cries.latest;
+            if (data.types[1] == null) {pokemonTypeTwo.textContent = 'N/A'; pokemonTypeTwo.style.backgroundColor = 'white'} else {
+            pokemonTypeTwo.textContent = data.types[1].type.name.charAt(0).toUpperCase()+data.types[1].type.name.slice(1).toLowerCase();
+            pokemonTypeTwo.style.backgroundColor = getColorForType(data.types[1].type.name.charAt(0).toUpperCase()+data.types[1].type.name.slice(1).toLowerCase());}
+            
+            storedSearchList.unshift(data.name.charAt(0).toUpperCase()+data.name.slice(1).toLowerCase());
+            localStorage.setItem('searchedPokemon', JSON.stringify(storedSearchList));
+
+            let li = document.createElement("li");
+            li.innerText = pokemonName.textContent.charAt(0).toUpperCase()+pokemonName.textContent.slice(1).toLowerCase();
+            searchList.prepend(li);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
 });

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duncan's Pokemon API Practice</title>
     <link rel="stylesheet" href="stylesheets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link rel="shortcut icon" type="image/jpg" href="images.png"/>
 </head>
 <body>
@@ -15,14 +16,15 @@
             <div class="pokemon-name" id="pokemon_name">Charizard</div>
             <div class="type-1" id="pokemon_type_one">Fire</div>
             <div class="type-2" id="pokemon_type_two">Flying</div>
-            <div class="play-cry-button" id="play-sound-button"><button>Play Cry</button></div>
-            <div class="external-info-button"><button id="external_button">Go to Info</button></div>
+            <div class="play-cry-button" id="play-sound-button">Play Cry</div>
+            <div class="external-info-button" id="external_button">Go to Info</div>
+            <div class="randomizer" id="randomizer-button"><i class="fas fa-random"></i></div>
         </div>
     </div>
     <div class="input-container"></div>
     <div class="button-container">
         <input placeholder="Pokemon Name" class="input-section" type="text" id="inputPokemon">
-        <div class="input-button"><button id="inputButton">Select New Pokemon</button></div>
+        <div class="input-button" id="inputButton">Select New Pokemon</div>
     </div>
     <audio id="audioPlayer">
         <source id="pokemonAudio" src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/6.ogg" type="audio/ogg">
@@ -43,7 +45,7 @@
             <ul id="searches">
             </ul>
         </div>
-        <div class="clear-button"><button id="clearButton">Clear Recent History</button></div>
+        <div class="clear-button" id="clearButton">Clear Recent History</div>
     </div>
 
     <script src="app.js"></script>
