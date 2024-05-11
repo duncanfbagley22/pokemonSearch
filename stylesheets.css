@@ -170,7 +170,7 @@ input{
     position: fixed;
     background: none;
     top: 18px;
-    left: 18px;
+    left: 5%;
     font-size: 24px;
     display: none;
 }
@@ -353,7 +353,9 @@ input{
     }
     :root{
         --centralWidth: 384px;
-        --itemWidth: 96px;
+    }
+    .pokemon-name{
+        font-size: 12px;
     }
 
 }
