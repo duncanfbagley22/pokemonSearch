@@ -1,5 +1,5 @@
 
-// Set an initial value for the first pokemon
+// Set an initial value for the first pokemon //
 let initialPokemon = {
     name: "Charizard",
     typeOne: "Fire",
@@ -7,29 +7,7 @@ let initialPokemon = {
     cry: "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/6.ogg",
     img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
 }
-
-
-
-let storedSearchList = localStorage.getItem('searchedPokemon');
-let searchList = document.getElementById('searches');
-
-if (storedSearchList) {
-    console.log("local storage has a value");
-    storedSearchList = JSON.parse(storedSearchList)
-} else {
-    storedSearchList = ['Charizard'];
-    localStorage.setItem('searchedPokemon', JSON.stringify(storedSearchList));
-}
-
-function initialUpdate(item){
-    let li = document.createElement("li");
-    li.innerText = item.charAt(0).toUpperCase()+item.slice(1).toLowerCase();
-    searchList.prepend(li);
-};
-
-storedSearchList.reverse().forEach(initialUpdate);
-
-
+// Colors for Type Background //
 const typeColors = [
     ['Normal', '#AAB09F'],
     ['Fire', '#EA7A3C'],
@@ -51,13 +29,37 @@ const typeColors = [
     ['Fairy', '#E397D1']
 ]
 
-
+// Function to get the color for a type //
 function getColorForType(type) {
     const entry = typeColors.find(entry => entry[0] === type);
     return entry ? entry[1] : null;
 }
 
-//Set the variables for the locations of the things that will change
+
+// Sets the stored list variable and values equal to the locally stored list //
+let storedSearchList = localStorage.getItem('searchedPokemon');
+let searchList = document.getElementById('searches');
+
+if (storedSearchList) {
+    storedSearchList = JSON.parse(storedSearchList);
+} else {
+    storedSearchList = ['Charizard'];
+    localStorage.setItem('searchedPokemon', JSON.stringify(storedSearchList));
+}
+
+
+function initialUpdate(item){
+    let li = document.createElement("li");
+    li.innerText = item.charAt(0).toUpperCase()+item.slice(1).toLowerCase();
+    searchList.prepend(li);
+};
+
+storedSearchList.reverse().forEach(initialUpdate);
+
+
+
+
+//Set the variables for the locations of the things that will change//
 const pokemonName = document.getElementById('pokemon_name');
 const pokemonTypeOne = document.getElementById('pokemon_type_one');
 const pokemonTypeTwo = document.getElementById('pokemon_type_two');
@@ -65,7 +67,7 @@ const pokemonImg = document.getElementById('pokemon_img');
 const audioSource = document.getElementById('pokemonAudio')
 
 
-//Set the initial values of the things that will change
+// Set the initial values of the things that will change //
 
 let item;
 
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     audioSource.src = item.cry
 });
 
-
+// Click the input button go have a new pokemon show up, or returns an alert if invalid pokemon //
 const inputButton = document.getElementById('inputButton')
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
             li.innerText = newPokemonButton.charAt(0).toUpperCase()+newPokemonButton.slice(1).toLowerCase();
             searchList.prepend(li);
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => alert('Invalid Pokemon'));
     });
 });
 
@@ -116,16 +118,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
+// Click the "Play Cry" button to play audio of the pokemon's cry//
 let playSoundButton = document.getElementById('play-sound-button');
 playSoundButton.addEventListener("click", function() {
         const audioPlayer = document.getElementById('audioPlayer');
         audioPlayer.load();
         audioPlayer.play();
-        console.log(audioSource.src)
 });
 
-
+// Click the "Clear Recent History" button to clear the local storage list //
 let clearButton = document.getElementById('clearButton');
 
 clearButton.addEventListener("click", function () {
@@ -135,6 +136,8 @@ clearButton.addEventListener("click", function () {
     console.log('buttonclicked')
 });
 
+
+// Click the random button to have a random pokemon appear and added to previous searches //
 const randomButton = document.getElementById('randomizer-button')
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -161,4 +164,21 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error('Error fetching data:', error));
     });
+});
+
+// Close Navigation Menu //
+let closeNav = document.getElementById('nav-text-close');
+
+closeNav.addEventListener("click", function () {
+    document.querySelector(".left-side-nav").style.display = "none";
+    document.querySelector(".nav-toggle").style.display = "block";
+});
+
+// Open Navigation Menu //
+
+let openNav = document.getElementById('nav-toggle');
+
+openNav.addEventListener("click", function () {
+    document.querySelector(".left-side-nav").style.display = "block";
+    document.querySelector(".nav-toggle").style.display = "none";
 });
