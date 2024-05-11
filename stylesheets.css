@@ -88,8 +88,9 @@ input{
     text-wrap: wrap;
     border-style: solid;
     font-size: 14px;
-    align-content: center;
+    align-items: center;
     font-weight: bold;
+    justify-content: center;
 }
 
 .pokemon-picture{
@@ -341,6 +342,27 @@ input{
     cursor: pointer;
 }
 
+#next_pokemon{
+    background-color: var(--buttonbackgroundcolor);
+    position: relative;
+    width: calc(var(--itemWidth)*1.25);
+    height: var(--itemHeight);
+    border-style: solid;
+    font-size: 20px;
+    align-content: center;
+    font-weight: bold;
+    top: 50px;
+    left:50%;
+    transform: translateX(-50%);
+    right: auto;
+}
+
+#next_pokemon:hover{
+    opacity: 90%;
+    background: var(--buttonhighlightcolor);
+    cursor: pointer;
+}
+
 @media (max-width: 880px) {
     .left-side-nav{
         display: none;
@@ -373,5 +395,4 @@ input{
         height: auto;
         width: 85%;
     }
-
 }

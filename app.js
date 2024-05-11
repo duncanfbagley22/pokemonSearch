@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function() {
             searchList.prepend(li);
             
             if (storedSearchList.length > 20) {storedSearchList.pop(); searchList.removeChild(searchList.lastChild)}
-            alert(storedSearchList)
         })
         .catch(error => console.error('Error fetching data:', error));
     });

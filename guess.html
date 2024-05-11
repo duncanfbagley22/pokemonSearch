@@ -3,10 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Pokemon</title>
+    <title>Duncan's Pokemon API Practice</title>
+    <link rel="stylesheet" href="stylesheets.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
     <link rel="shortcut icon" type="image/jpg" href="images.png"/>
 </head>
 <body>
-    Still to come
+    <div class="title">Who's That Pokemon?</div>
+    <div class="info-container">
+        <div class="pokemon-picture"><img id="pokemon_img" src=""></div>
+        <div class="pokemon-info">
+            <div class="pokemon-name" id="pokemon_name">???</div>
+            <div id="next_pokemon">Start</div>
+        </div>
+    </div>
+    <div class="input-container"></div>
+    <div class="button-container">
+        <input placeholder="Pokemon Name" class="input-section" type="text" id="inputPokemon">
+        <div class="input-button" id="inputButton">Enter</div>
+    </div>
+
+    <button class="nav-toggle" id="nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="left-side-nav">
+        <div class="nav-text"><b>Navigation</b></div>
+        <ul>
+            <li><a href="index.html">Search</a></li>
+            <li><a href="guess.html">Guess</a></li>
+        </ul>
+        <div class="nav-text-close" id="nav-text-close"><b>Close Menu</b></div>
+    </div>
+
+    <script src="guessApp.js"></script>
 </body>
+
 </html>
