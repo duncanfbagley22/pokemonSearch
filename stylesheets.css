@@ -36,6 +36,8 @@ body{
     text-wrap: nowrap;
     border-style: solid;
     font-weight: bold;
+    height: calc(var(--itemHeight)*1.25);
+    align-content: center;
 }
 
 .info-container{
@@ -60,6 +62,34 @@ body{
     height: 64px;
     font-size: 36px;
     border-style: solid;
+    display: flex;
+    align-items: center;
+}
+
+input{
+    height: var(--itemHeight);
+    display: flex;
+    width: 60%;
+    left: 3%;
+    top: 14px;
+    position: fixed;
+    border-style: solid;
+    font-size: 14px;
+}
+
+.input-button{
+    background: none;
+    background-color: var(--buttonbackgroundcolor);
+    display: flex;
+    position: fixed;
+    right: 3%;
+    width: var(--itemWidth);
+    height: var(--itemHeight);
+    text-wrap: wrap;
+    border-style: solid;
+    font-size: 14px;
+    align-content: center;
+    font-weight: bold;
 }
 
 .pokemon-picture{
@@ -122,16 +152,6 @@ body{
     font-size: 20px;
     align-content: center;
     font-weight: bold;
-}
-
-input{
-    height: var(--itemHeight);
-    width: calc(var(--itemWidth)*1.75);
-    left: 5%;
-    top: 14px;
-    position: fixed;
-    border-style: solid;
-    font-size: 14px;
 }
 
 .left-side-nav{
@@ -227,24 +247,6 @@ input{
     background: var(--buttonhighlightcolor);
     cursor: pointer;
 }
-
-
-.input-button{
-    background: none;
-    background-color: var(--buttonbackgroundcolor);
-    position: fixed;
-    width: calc(var(--itemWidth)*1.5);
-    top: 23%;
-    left: 75%;
-    transform: translateX(-50%);
-    height: var(--itemHeight);
-    text-wrap: nowrap;
-    border-style: solid;
-    font-size: 14px;
-    align-content: center;
-    font-weight: bold;
-}
-
 
 .input-button:hover{
     opacity: 90%;
@@ -359,6 +361,12 @@ input{
     }
     .title{
         font-size: 24px;
+    }
+    .input-button{
+        width: calc(var(--itemWidth)*.75)
+    }
+    .randomizer{
+        left: 75%;
     }
 
 }
