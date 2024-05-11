@@ -161,6 +161,9 @@ document.addEventListener("DOMContentLoaded", function() {
             let li = document.createElement("li");
             li.innerText = pokemonName.textContent.charAt(0).toUpperCase()+pokemonName.textContent.slice(1).toLowerCase();
             searchList.prepend(li);
+            
+            if (storedSearchList.length > 20) {storedSearchList.pop(); searchList.removeChild(searchList.lastChild)}
+            alert(storedSearchList)
         })
         .catch(error => console.error('Error fetching data:', error));
     });
