@@ -502,6 +502,11 @@ input[type=checkbox]{
         width: 85%;
     }
     .settings-box{
-        width: 400px;
+        width: 80%;
+
     }
+    .settings-checkboxes{
+        font-size: 10px;
+    }
+
 }
