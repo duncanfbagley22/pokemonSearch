@@ -507,6 +507,14 @@ input[type=checkbox]{
     }
     .settings-checkboxes{
         font-size: 10px;
+        width: 100%;
+    }
+    
+    .settings-title{
+        width: 100%;
     }
 
+    input[type=checkbox]{
+        transform: scale(.9);
+    }
 }
