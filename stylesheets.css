@@ -502,6 +502,6 @@ input[type=checkbox]{
         width: 85%;
     }
     .settings-box{
-        width: calc(var(--centralWidth)*.75);
+        width: 400px;
     }
 }
