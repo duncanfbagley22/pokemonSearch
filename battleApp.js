@@ -12,6 +12,7 @@ openNav.addEventListener("click", function () {
     document.querySelector(".nav-toggle").style.display = "none";
 });
 
+// List of Pokemon //
 const pokemonChoices = [
     {
     id: "machop",
@@ -259,6 +260,7 @@ const pokemonChoices = [
     }
 ];
 
+// Type Effectiveness Chart //
 let typeChart = {
     "normal": {
       "normal": 1,
@@ -325,10 +327,8 @@ let typeChart = {
     }
   };
 // Get Pokemon Names and IDs //
-//const pokemon1name = prompt("Select pokemon 1: machop, squirtle, diglett, or dratini");
-//const pokemon2name = prompt("Select pokemon 2: machop, squirtle, diglett, or dratini");
-pokemon1name = 'machop';
-pokemon2name = 'squirtle';
+const pokemon1name = prompt("Select pokemon 1: machop, squirtle, diglett, or dratini");
+const pokemon2name = prompt("Select pokemon 2: machop, squirtle, diglett, or dratini");
 
 let pokemon1id;
 let pokemon2id;
@@ -349,7 +349,19 @@ const pokemon1move1 = pokemonChoices[pokemon1id].moves.move1.name;
 const pokemon1move2 = pokemonChoices[pokemon1id].moves.move2.name;
 const pokemon1move3 = pokemonChoices[pokemon1id].moves.move3.name;
 const pokemon1move4 = pokemonChoices[pokemon1id].moves.move4.name;
+const pokemon2hpbase = pokemonChoices[pokemon2id].stats.hp;
+const pokemon2attackbase = pokemonChoices[pokemon2id].stats.attack;
+const pokemon2defensebase = pokemonChoices[pokemon2id].stats.defense;
+const pokemon2speedbase = pokemonChoices[pokemon2id].stats.speed;
+const pokemon2specialbase = pokemonChoices[pokemon2id].stats.special;
+const pokemon2Back = pokemonChoices[pokemon2id].back_sprite;
+const pokemon2Front = pokemonChoices[pokemon2id].front_sprite;
+const pokemon2move1 = pokemonChoices[pokemon2id].moves.move1.name;
+const pokemon2move2 = pokemonChoices[pokemon2id].moves.move2.name;
+const pokemon2move3 = pokemonChoices[pokemon2id].moves.move3.name;
+const pokemon2move4 = pokemonChoices[pokemon2id].moves.move4.name;
 
+// Set user pokemon EVs //
 let pokemon1evs = {
     hp: 5,
     attack: 5,
@@ -358,6 +370,16 @@ let pokemon1evs = {
     special: 5
 }
 
+// Set user pokemon IVs //
+const pokemon1ivs = {
+    hp: Math.floor(Math.random()*32),
+    attack: Math.floor(Math.random()*32),
+    defense: Math.floor(Math.random()*32),
+    speed: Math.floor(Math.random()*32),
+    special: Math.floor(Math.random()*32)
+}
+
+// Set user pokemon stat multiplier values //
 let pokemon1stats = {
     attackMultiplierN: 2,
     attackMultiplierD: 2,
@@ -373,26 +395,7 @@ let pokemon1stats = {
     accuracyMultiplierD: 2
 }
 
-const pokemon1ivs = {
-    hp: Math.floor(Math.random()*32),
-    attack: Math.floor(Math.random()*32),
-    defense: Math.floor(Math.random()*32),
-    speed: Math.floor(Math.random()*32),
-    special: Math.floor(Math.random()*32)
-}
-
-const pokemon2hpbase = pokemonChoices[pokemon2id].stats.hp;
-const pokemon2attackbase = pokemonChoices[pokemon2id].stats.attack;
-const pokemon2defensebase = pokemonChoices[pokemon2id].stats.defense;
-const pokemon2speedbase = pokemonChoices[pokemon2id].stats.speed;
-const pokemon2specialbase = pokemonChoices[pokemon2id].stats.special;
-const pokemon2Back = pokemonChoices[pokemon2id].back_sprite;
-const pokemon2Front = pokemonChoices[pokemon2id].front_sprite;
-const pokemon2move1 = pokemonChoices[pokemon2id].moves.move1.name;
-const pokemon2move2 = pokemonChoices[pokemon2id].moves.move2.name;
-const pokemon2move3 = pokemonChoices[pokemon2id].moves.move3.name;
-const pokemon2move4 = pokemonChoices[pokemon2id].moves.move4.name;
-
+// Set opponent pokemon EVs //
 let pokemon2evs = {
     hp: 5,
     attack: 5,
@@ -401,6 +404,16 @@ let pokemon2evs = {
     special: 5
 }
 
+// Set opponent pokemon IVs //
+const pokemon2ivs = {
+    hp: Math.floor(Math.random()*32),
+    attack: Math.floor(Math.random()*32),
+    defense: Math.floor(Math.random()*32),
+    speed: Math.floor(Math.random()*32),
+    special: Math.floor(Math.random()*32)
+}
+
+// Set opponent pokemon stat multiplier values //
 let pokemon2stats = {
     attackMultiplierN: 2,
     attackMultiplierD: 2,
@@ -416,75 +429,56 @@ let pokemon2stats = {
     accuracyMultiplierD: 2
 }
 
-const pokemon2ivs = {
-    hp: Math.floor(Math.random()*32),
-    attack: Math.floor(Math.random()*32),
-    defense: Math.floor(Math.random()*32),
-    speed: Math.floor(Math.random()*32),
-    special: Math.floor(Math.random()*32)
-}
-
-
+// Function to calculate the actual HP for a pokemon //
 function calculateHP (base, iv, ev, level) {
     return Math.floor(.01*(2*base + iv + Math.floor(0.25*ev))*level) + level + 10
 }
 
+// Function to calculate the actual stats for a pokemon //
 function calculateStat (base, iv, ev, level) {
     return Math.floor(.01*(2*base + iv + Math.floor(0.25*ev))*level) + 5
 }
 
-let pokemon1hp, pokemon1attack, pokemon1defense, pokemon1special, pokemon1speed;
-let pokemon2hp, pokemon2attack, pokemon2defense, pokemon2special, pokemon2speed;
+let pokemon1hp, pokemon1attack, pokemon1defense, pokemon1special, pokemon1speed, pokemon2hp, pokemon2attack, pokemon2defense, pokemon2special, pokemon2speed;
 
-function getPokemonData () {
-        pokemon1hp = calculateHP(pokemon1hpbase, pokemon1ivs.hp, pokemon1evs.hp, level);
+// Function to set initial values for both pokemon //
+function setPokemonData () {
+        pokemon1hpinitial = calculateHP(pokemon1hpbase, pokemon1ivs.hp, pokemon1evs.hp, level);
+        pokemon1hpcurrent = pokemon1hpinitial;
         pokemon1attack = calculateStat(pokemon1attackbase, pokemon1ivs.attack, pokemon1evs.attack, level);
         pokemon1defense = calculateStat(pokemon1defensebase, pokemon1ivs.defense, pokemon1evs.defense, level);
         pokemon1special = calculateStat(pokemon1specialbase, pokemon1ivs.special, pokemon1evs.special, level);
         pokemon1speed = calculateStat(pokemon1speedbase, pokemon1ivs.speed, pokemon1evs.speed, level);
-        pokemon2hp = calculateHP(pokemon2hpbase, pokemon2ivs.hp, pokemon2evs.hp, level);
+        pokemon2hpinitial = calculateHP(pokemon2hpbase, pokemon2ivs.hp, pokemon2evs.hp, level);
+        pokemon2hpcurrent = pokemon2hpinitial;
         pokemon2attack = calculateStat(pokemon2attackbase, pokemon2ivs.attack, pokemon2evs.attack, level);
         pokemon2defense = calculateStat(pokemon2defensebase, pokemon2ivs.defense, pokemon2evs.defense, level);
         pokemon2special = calculateStat(pokemon2specialbase, pokemon2ivs.special, pokemon2evs.special, level);
         pokemon2speed = calculateStat(pokemon2speedbase, pokemon2ivs.speed, pokemon2evs.speed, level);
 };
 
+// Populate initial values for each pokemon //
 const inputButton = document.getElementById('input_button');
 
 inputButton.addEventListener("click", function() {
-    getPokemonData();
-    document.getElementById('pokemon_name').textContent = pokemon1name;
+    setPokemonData();
+    document.getElementById('pokemon_name').textContent = pokemon1name.toUpperCase();
     document.getElementById('pokemon_level').textContent = level;
-    document.getElementById('pokemon_hp').textContent = pokemon1hp;
-    document.getElementById('pokemon_attack').textContent = pokemon1stats.attackMultiplierN/pokemon1stats.attackMultiplierD;
-    document.getElementById('pokemon_defense').textContent = pokemon1stats.defenseMultiplierN/pokemon1stats.defenseMultiplierD;
-    document.getElementById('pokemon_special').textContent = pokemon1stats.specialMultiplierN/pokemon1stats.specialMultiplierD;
-    document.getElementById('pokemon_speed').textContent = pokemon1stats.speedMultiplierN/pokemon1stats.speedMultiplierD;
-    document.getElementById('pokemon_accuracy').textContent = pokemon1stats.accuracyMultiplierN/pokemon1stats.accuracyMultiplierD;
-    document.getElementById('pokemon_evasion').textContent = pokemon1stats.evasionMultiplierN/pokemon1stats.evasionMultiplierD;
-    document.getElementById('pokemon1move1').innerHTML = pokemon1move1;
-    document.getElementById('pokemon1move2').innerHTML = pokemon1move2;
-    document.getElementById('pokemon1move3').innerHTML = pokemon1move3;
-    document.getElementById('pokemon1move4').innerHTML = pokemon1move4;
+    document.getElementById('pokemon_hp_initial').textContent = pokemon1hpinitial;
+    document.getElementById('pokemon_hp_current').textContent = pokemon1hpcurrent;
+    document.getElementById('pokemon1move1').innerHTML = pokemon1move1.toUpperCase();
+    document.getElementById('pokemon1move2').innerHTML = pokemon1move2.toUpperCase();
+    document.getElementById('pokemon1move3').innerHTML = pokemon1move3.toUpperCase();
+    document.getElementById('pokemon1move4').innerHTML = pokemon1move4.toUpperCase();
     document.getElementById('pokemonBack1').src = pokemon1Back;
-    document.getElementById('pokemon_name_two').textContent = pokemon2name;
+    document.getElementById('pokemon_name_two').textContent = pokemon2name.toUpperCase();
     document.getElementById('pokemon_level_two').textContent = level;
-    document.getElementById('pokemon_hp_two').textContent = pokemon2hp;
-    document.getElementById('pokemon_attack_two').textContent = pokemon2stats.attackMultiplierN/pokemon2stats.attackMultiplierD;
-    document.getElementById('pokemon_defense_two').textContent = pokemon2stats.defenseMultiplierN/pokemon2stats.defenseMultiplierD;
-    document.getElementById('pokemon_special_two').textContent = pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD;
-    document.getElementById('pokemon_speed_two').textContent = pokemon2stats.speedMultiplierN/pokemon2stats.speedMultiplierD;
-    document.getElementById('pokemon_accuracy_two').textContent = pokemon2stats.speedMultiplierN/pokemon2stats.speedMultiplierD;
-    document.getElementById('pokemon_evasion_two').textContent = pokemon2stats.evasionMultiplierN/pokemon2stats.evasionMultiplierD;
     document.getElementById('pokemonFront2').src = pokemon2Front;
-    document.getElementById('pokemon2move1').innerHTML = pokemon2move1;
-    document.getElementById('pokemon2move2').innerHTML = pokemon2move2;
-    document.getElementById('pokemon2move3').innerHTML = pokemon2move3;
-    document.getElementById('pokemon2move4').innerHTML = pokemon2move4;
+    document.getElementById('battle-field').style.visibility = 'visible';
+    document.getElementById('input_button').style.visibility = 'hidden';
 });
 
-const moveButtons = document.querySelectorAll(".movebutton")
-
+// Object used to map moves and names //
 const moveVariables = {
     "pokemon1move1": pokemon1move1,
     "pokemon1move2": pokemon1move2,
@@ -498,21 +492,41 @@ const moveVariables = {
     "pokemon2name": pokemon2name
 };
 
+// Function to return the move variable based on a clicked button //
 function getPokemonName(moveVariableName) {
     const parts = moveVariableName.split("move");
     const pokemonNameVariable = parts[0] + "name";
     return pokemonNameVariable;
 }
 
+// Function to return the index of a move for a specific pokemon //
+function findMoveIndex(pokemonName, moveName) {
+    const pokemon = pokemonChoices.find(pokemon => pokemon.id === pokemonName);
+    if (pokemon) {
+        const moveIndex = Object.keys(pokemon.moves).findIndex(move => pokemon.moves[move].name === moveName);
+        return moveIndex !== -1 ? moveIndex + 1 : -1;
+    } else {
+        return -1;
+    }
+}
+
+const moveButtons = document.querySelectorAll(".movebuttonselection");
+const textField = document.getElementById("text-field")
+
 moveButtons.forEach(move => {
     move.addEventListener("click", function() {
         const selectedMoveName = moveVariables[this.id];
         const selectedPokemonName = moveVariables[getPokemonName(this.id)];
         const userOpponent = this.id.charAt(7);
+
         let pokemonIndex;
         if (selectedPokemonName === 'machop') {pokemonIndex = 0} else if (selectedPokemonName === 'squirtle') {pokemonIndex = 1} else if (selectedPokemonName === 'diglett') {pokemonIndex = 2} else if (selectedPokemonName === 'dratini') {pokemonIndex = 3};
         const moveIndex = 'move' + findMoveIndex(selectedPokemonName, selectedMoveName);
-        alert (`${selectedPokemonName} used ${selectedMoveName}!, and this is pokemon ${userOpponent} and has an index of ${pokemonIndex}. The move is ${moveIndex}`);
+
+        if (pokemon1speed >= pokemon2speed) 
+            {textField.textContent = `${selectedPokemonName.toUpperCase()} used ${selectedMoveName.toUpperCase()}!`}
+         else {alert('opponent goes first')}
+
         if (userOpponent === '1') {userMove(moveIndex, pokemon1id, pokemon2id)} else {opponentMove(moveIndex, pokemon2id, pokemon1id)};
         document.getElementById('pokemon_hp').textContent = pokemon1hp;
         document.getElementById('pokemon_hp_two').textContent = pokemon2hp;
@@ -526,6 +540,8 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
     if (pokemonChoices[userPokemon].type === pokemonChoices[userPokemon].moves[moveIndex].type) {_stab = 1.5} else {_stab = 1};
     let _effectiveness = typeChart[pokemonChoices[userPokemon].moves[moveIndex].type][pokemonChoices[opponentPokemon].type];
     if (randomForCritical > .0417) {_critical=1} else {_critical=2};
+    let _hit = pokemonChoices[userPokemon].moves[moveIndex].accuracy * (pokemon1stats.accuracyMultiplierN/pokemon1stats.accuracyMultiplierD) * (1/(pokemon2stats.evasionMultiplierN/pokemon2stats.evasionMultiplierD))
+    let _hitRand = Math.floor(Math.random()*100)+1;
     
     if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'user') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
@@ -539,13 +555,17 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
         } else if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] === 1 && pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change < 0) {
         {pokemon1stats[impactedStatD] = pokemon1stats[impactedStatD] - pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change}
         };
-        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] > 4) {pokemon1stats[impactedStatN] = 8};
-        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] < .25) {pokemon1stats[impactedStatD] = 8};
-        alert(`User's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} is ${pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD]}`);
-
+        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] > 4) {
+            pokemon1stats[impactedStatN] = 8; alert('Nothing happened!');
+        } else if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] < .25) {
+            pokemon1stats[impactedStatD] = 8; alert('Nothing happened!')
+        } else{
+        alert(`${pokemonChoices[userPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} rose!`);
+        };
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'opponent') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
         let impactedStatD = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierD';
+        if (_hit<_hitRand) {alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)} else {
         if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] > 1) {
         {pokemon2stats[impactedStatN] = pokemon2stats[impactedStatN] + pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change}
         } else if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] < 1) {
@@ -555,27 +575,39 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
         } else if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] === 1 && pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change < 0) {
         {pokemon2stats[impactedStatD] = pokemon2stats[impactedStatD] - pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change};
         };
-        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] > 4) {pokemon2stats[impactedStatN] = 8};
-        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] < .25) {pokemon2stats[impactedStatD] = 8};
-        alert(`Opponent's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} is ${pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]}`);
-
+        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] > 4) {
+            pokemon2stats[impactedStatN] = 8; alert('Nothing happened!')
+        } else if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] < .25) {
+            pokemon2stats[impactedStatD] = 8; alert('Nothing happened!')
+        } else {
+        alert(`${pokemonChoices[opponentPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} fell!`);
+        }
+        }
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'physical') {
         let _attack = pokemonChoices[userPokemon].stats.attack * (pokemon1stats.attackMultiplierN/pokemon1stats.attackMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.defense * (pokemon2stats.defenseMultiplierN/pokemon2stats.defenseMultiplierD);
-        alert(`physical move with a power of ${_power}, attack stat is ${_attack}, defense stat is ${_defense}, effectiveness is ${_effectiveness}, stab is ${_stab} and critical is ${_critical}`);
         let _damage = (((((2*level*_critical)/5+2)*_power*(_attack/_defense))/50)+2)*_stab*_effectiveness;
         _damage = Math.round(_damage);
-        pokemon2hp = Math.max(pokemon2hp - _damage, 0);
-        alert (`damage would be ${_damage} and the opponent's hp would now be ${pokemon2hp}`);
+        if (_hit<_hitRand) {
+            alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)
+        } else {
+            pokemon2hp = Math.max(pokemon2hp - _damage, 0);
+            if (_critical === 2) {alert ('Critical hit!')};
+            if (_effectiveness > 1) {alert (`It's super effective!`)};
+        };
 
     } else if(pokemonChoices[userPokemon].moves[moveIndex].category === 'special') {
         let _attack = pokemonChoices[userPokemon].stats.special * (pokemon1stats.specialMultiplierN/pokemon1stats.specialMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.special * (pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD);
-        alert(`special move with a power of ${_power}, attack stat is ${_attack}, defense stat is ${_defense}, effectiveness is ${_effectiveness}, stab is ${_stab} and critical is ${_critical}`);
         let _damage = (((((2*level*_critical)/5+2)*_power*(_attack/_defense))/50)+2)*_stab*_effectiveness;
         _damage = Math.round(_damage);
-        pokemon2hp = Math.max(pokemon2hp - _damage, 0);
-        alert (`damage would be ${_damage} and the opponent's hp would now be ${pokemon2hp}`)
+        if (_hit<_hitRand) {
+            alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)
+        } else {
+            pokemon2hp = Math.max(pokemon2hp - _damage, 0);
+            if (_critical === 2) {alert ('Critical hit!')};
+            if (_effectiveness > 1) {alert (`It's super effective!`)};
+        };
     } 
 }
 
@@ -586,6 +618,8 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
     if (pokemonChoices[userPokemon].type === pokemonChoices[userPokemon].moves[moveIndex].type) {_stab = 1.5} else {_stab = 1};
     let _effectiveness = typeChart[pokemonChoices[userPokemon].moves[moveIndex].type][pokemonChoices[opponentPokemon].type];
     if (randomForCritical > .0417) {_critical=1} else {_critical=2};
+    let _hit = pokemonChoices[userPokemon].moves[moveIndex].accuracy * (pokemon2stats.accuracyMultiplierN/pokemon2stats.accuracyMultiplierD) * (1/(pokemon1stats.evasionMultiplierN/pokemon1stats.evasionMultiplierD))
+    let _hitRand = Math.floor(Math.random()*100)+1;
     
     if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'user') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
@@ -599,13 +633,18 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
         } else if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] === 1 && pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change < 0) {
         {pokemon2stats[impactedStatD] = pokemon2stats[impactedStatD] - pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change}
         };
-        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] > 4) {pokemon2stats[impactedStatN] = 8};
-        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] < .25) {pokemon2stats[impactedStatD] = 8};
-        alert(`User's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} is ${pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]}`);
+        if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] > 4) {
+            pokemon2stats[impactedStatN] = 8; alert('Nothing happened!');
+        } else if (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD] < .25) {
+            pokemon2stats[impactedStatD] = 8; alert('Nothing happened!')
+        } else{
+        alert(`${pokemonChoices[userPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} rose!`);
+        };
 
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'opponent') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
         let impactedStatD = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierD';
+        if (_hit<_hitRand) {alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)} else {
         if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] > 1) {
         {pokemon1stats[impactedStatN] = pokemon1stats[impactedStatN] + pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change}
         } else if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] < 1) {
@@ -615,18 +654,27 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
         } else if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] === 1 && pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change < 0) {
         {pokemon1stats[impactedStatD] = pokemon1stats[impactedStatD] - pokemonChoices[userPokemon].moves[moveIndex].stat_changes.change};
         };
-        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] > 4) {pokemon1stats[impactedStatN] = 8};
-        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] < .25) {pokemon1stats[impactedStatD] = 8};
-        alert(`Opponent's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} is ${pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD]}`);
-
+        if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] > 4) {
+            pokemon1stats[impactedStatN] = 8; alert('Nothing happened!')
+        } else if (pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD] < .25) {
+            pokemon1stats[impactedStatD] = 8; alert('Nothing happened!')
+        } else {
+        alert(`${pokemonChoices[opponentPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} fell!`);
+        }
+        }
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'physical') {
         let _attack = pokemonChoices[userPokemon].stats.attack * (pokemon2stats.attackMultiplierN/pokemon2stats.attackMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.defense * (pokemon1stats.defenseMultiplierN/pokemon1stats.defenseMultiplierD);
         alert(`physical move with a power of ${_power}, attack stat is ${_attack}, defense stat is ${_defense}, effectiveness is ${_effectiveness}, stab is ${_stab} and critical is ${_critical}`);
         let _damage = (((((2*level*_critical)/5+2)*_power*(_attack/_defense))/50)+2)*_stab*_effectiveness;
         _damage = Math.round(_damage);
-        pokemon1hp = Math.max(pokemon1hp - _damage, 0);
-        alert (`damage would be ${_damage} and the opponent's hp would now be ${pokemon1hp}`);
+        if (_hit<_hitRand) {
+            alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)
+        } else {
+            pokemon1hp = Math.max(pokemon1hp - _damage, 0);
+            if (_critical === 2) {alert ('Critical hit!')};
+            if (_effectiveness > 1) {alert (`It's super effective!`)};
+        };
 
     } else if(pokemonChoices[userPokemon].moves[moveIndex].category === 'special') {
         let _attack = pokemonChoices[userPokemon].stats.special * (pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD);
@@ -634,20 +682,18 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
         alert(`special move with a power of ${_power}, attack stat is ${_attack}, defense stat is ${_defense}, effectiveness is ${_effectiveness}, stab is ${_stab} and critical is ${_critical}`);
         let _damage = (((((2*level*_critical)/5+2)*_power*(_attack/_defense))/50)+2)*_stab*_effectiveness;
         _damage = Math.round(_damage);
-        pokemon1hp = Math.max(pokemon1hp - _damage, 0);
-        alert (`damage would be ${_damage} and the opponent's hp would now be ${pokemon1hp}`)
+        if (_hit<_hitRand) {
+            alert(`${pokemonChoices[userPokemon].id.toUpperCase()} missed!`)
+        } else {
+            pokemon1hp = Math.max(pokemon1hp - _damage, 0);
+            if (_critical === 2) {alert ('Critical hit!')};
+            if (_effectiveness > 1) {alert (`It's super effective!`)};
+        };
     } 
 }
 
-function findMoveIndex(pokemonName, moveName) {
-    const pokemon = pokemonChoices.find(pokemon => pokemon.id === pokemonName);
-    if (pokemon) {
-        const moveIndex = Object.keys(pokemon.moves).findIndex(move => pokemon.moves[move].name === moveName);
-        return moveIndex !== -1 ? moveIndex + 1 : -1;
-    } else {
-        return -1;
-    }
-}
+
+
 
 
 

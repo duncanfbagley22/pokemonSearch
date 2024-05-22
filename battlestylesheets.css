@@ -11,6 +11,11 @@
     --itemHeight: 30px;
 }
 
+@font-face {
+    font-family: PokemonFont;
+    src: url(PokemonGb-RAeo.ttf);
+  }
+
 *{
     font-family: 'Courier New', Courier, monospace;
     color: black;
@@ -93,7 +98,9 @@ body{
 
 .loading-buttons{
     position: fixed;
-    right: 20px;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%, -50%);
 }
 
 .battle-input-button{
@@ -154,6 +161,252 @@ body{
     background: var(--buttonhighlightcolor);
     cursor: pointer;
 }
+
+.battle-field{
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 1;
+    left: 50%;
+    transform: translate(-50%, 30%);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    visibility: hidden;
+}
+
+.text-field{
+    border-style: double;
+    height: 90%;
+    width: 95%;
+    transform: translateX(3%);
+    font-family: PokemonFont;
+    font-size: 22px;
+    line-height: 2;
+    text-align: left;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.move-selection{
+    border-style: double;
+    height: 90%;
+    width: 75%;
+    transform: translateX(28.75%);
+    background-color: white;
+}
+
+.movebuttonselection{
+    text-align: left;
+    font-family: PokemonFont;
+    padding: 3px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+#pokemon1move1:hover:before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    transform: translateY(0%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+#pokemon1move2:hover:before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 28px;
+    transform: translateY(0%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+#pokemon1move3:hover:before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 49px;
+    transform: translateY(0%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+#pokemon1move4:hover:before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 71px;
+    transform: translateY(0%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.sub-battle-field{
+    flex: 1;
+    height: 33%;
+}
+
+#pokemon_name_two{
+    text-align: left;
+    font-family: PokemonFont;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+#pokemon_name{
+    text-align: right;
+    font-family: PokemonFont;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.pokemon_level_field{
+    font-family: PokemonFont;
+    font-size: 6px;
+    text-align: right;
+    margin-right: 40px;
+}
+
+.pokemon_level_field_two{
+    font-family: PokemonFont;
+    font-size: 6px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+#pokemon_level{
+    font-family: PokemonFont;   
+    font-size: 10px;
+}
+
+#pokemon_level_two{
+    font-family: PokemonFont;   
+    font-size: 10px;
+}
+
+#pokemon_hp_current{
+    font-family: PokemonFont;   
+    font-size: 12px;
+}
+
+#pokemon_hp_initial{
+    font-family: PokemonFont;   
+    font-size: 12px;
+}
+
+.hp_user{
+    text-align: right;
+    margin-right: 20px;
+}
+
+#pokemonFront2{
+    position: absolute;
+    right: 0px;
+    top: -25px;
+    width: 140px;
+    height: 140px;
+}
+
+#pokemonBack1{
+    position: absolute;
+    left: 0px;
+    top: 70px;
+    width: 140px;
+    height: 140px;
+}
+
+.health-bar-container-2 {
+    width: 120px;
+    display: flex;
+}
+
+.health-bar-container {
+    width: 120px;
+    display: flex;
+    margin-right:10px;
+    margin-left: auto;
+}
+
+.health-bar {
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+    border: 1px solid #000;
+    position: relative;
+    top: 3px;
+}
+
+.health-bar-2 {
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+    border: 1px solid #000;
+    position: relative;
+    top: 3px;
+}
+
+.health-bar::after {
+    content: '';
+    position: absolute;
+    left: -25px;
+    bottom: -20px;
+    width: 120px;
+    height: 23px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.health-bar-2::after {
+    content: '';
+    position: absolute;
+    left: -25px;
+    bottom: -6px;
+    width: 120px;
+    height: 10px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+
+.health-bar-fill {
+    height: 100%;
+    background-color: green;
+    width: 100%; /* This will be dynamically adjusted */
+    transition: width 0.3s ease-in-out;
+}
+
+.hp-label{
+    font-family: PokemonFont;   
+    font-size: 6px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.hp-label-2{
+    font-family: PokemonFont;   
+    font-size: 6px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
 
 @media (max-width: 880px) {
     .left-side-nav{
