@@ -178,29 +178,35 @@ body{
 
 .text-field{
     border-style: double;
+    border-width: 5px;
     height: 90%;
     width: 95%;
     transform: translateX(3%);
     font-family: PokemonFont;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 2;
     text-align: left;
     padding: 5px;
     box-sizing: border-box;
+    padding-top: 0;
 }
 
 .move-selection{
     border-style: double;
-    height: 90%;
+    border-width: 5px;
+    height: 80%;
     width: 75%;
-    transform: translateX(28.75%);
+    transform: translate(25%, -100%);
     background-color: white;
+    font-size: 14px;
+    visibility: hidden;
 }
 
 .movebuttonselection{
     text-align: left;
     font-family: PokemonFont;
     padding: 3px;
+    padding-top: 3.5px;
     padding-left: 20px;
     cursor: pointer;
 }
@@ -222,7 +228,7 @@ body{
     content: '';
     position: absolute;
     left: 8px;
-    top: 28px;
+    top: 25px;
     transform: translateY(0%);
     width: 0;
     height: 0;
@@ -235,7 +241,7 @@ body{
     content: '';
     position: absolute;
     left: 8px;
-    top: 49px;
+    top: 46px;
     transform: translateY(0%);
     width: 0;
     height: 0;
@@ -248,7 +254,7 @@ body{
     content: '';
     position: absolute;
     left: 8px;
-    top: 71px;
+    top: 65px;
     transform: translateY(0%);
     width: 0;
     height: 0;
