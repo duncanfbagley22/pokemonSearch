@@ -521,7 +521,33 @@ function findMoveIndex(pokemonName, moveName) {
 }
 
 const moveButtons = document.querySelectorAll(".movebuttonselection");
+const healthBarFill = document.getElementById('health-bar-fill');
+const healthBarFill2 = document.getElementById('health-bar-fill-2');
 
+
+function updateHealthBar(currenthp, initialhp) {
+    const healthPercentage = (currenthp / initialhp) * 100;
+    healthBarFill.style.width = healthPercentage + '%';
+    if (healthPercentage > 50) {
+        healthBarFill.style.backgroundColor = 'green';
+    } else if (healthPercentage > 20) {
+        healthBarFill.style.backgroundColor = '#ffe000';
+    } else {
+        healthBarFill.style.backgroundColor = 'red';
+    }
+}
+
+function updateHealthBar2(currenthp, initialhp) {
+    const healthPercentage = (currenthp / initialhp) * 100;
+    healthBarFill2.style.width = healthPercentage + '%';
+    if (healthPercentage > 50) {
+        healthBarFill2.style.backgroundColor = 'green';
+    } else if (healthPercentage > 20) {
+        healthBarFill2.style.backgroundColor = '#ffe000';
+    } else {
+        healthBarFill2.style.backgroundColor = 'red';
+    }
+}
 
 moveButtons.forEach(move => {
     move.addEventListener("click", function() {
@@ -531,16 +557,17 @@ moveButtons.forEach(move => {
 
         const selectedMoveName = moveVariables[this.id];
         const selectedPokemonName = pokemon1name;
-        //const userOpponent = this.id.charAt(7);
 
         const moveIndex = 'move' + findMoveIndex(selectedPokemonName, selectedMoveName);
 
-        const randForOpponent = Math.floor(Math.random() * 4)+1
-        const opponentMoveIndex = 'move' + randForOpponent;
-        const opponentMoveName = moveVariables['pokemon2move' + randForOpponent];
-        const opponentPokemonName = pokemon2name;
+        let randForOpponent = Math.floor(Math.random() * 4)+1
+        let opponentMoveIndex = 'move' + randForOpponent;
+        let opponentMoveName = moveVariables['pokemon2move' + randForOpponent];
+        let opponentPokemonName = pokemon2name;
+    
         console.log(`User's hp is ${pokemon1hpcurrent}`);
         console.log(`Opponent's hp is ${pokemon2hpcurrent}`);
+        console.log(`Move Index: ${moveIndex} Opponent Move Index: ${opponentMoveIndex}`)
         setTimeout(function() {
             if (pokemon1speed >= pokemon2speed) {
                 setTimeout(function() {
@@ -550,12 +577,15 @@ moveButtons.forEach(move => {
                     userMove(moveIndex, pokemon1id, pokemon2id);
                 }, 2000);
                 setTimeout(function() {
+                    updateHealthBar2(pokemon2hpcurrent, pokemon2hpinitial);
                     textField.textContent = `${opponentPokemonName.toUpperCase()} used ${opponentMoveName.toUpperCase()}!`;
                 }, 6000);
                 setTimeout(function() {
-                    opponentMove(moveIndex, pokemon2id, pokemon1id);
+                    opponentMove(opponentMoveIndex, pokemon2id, pokemon1id);
                 }, 10000);
                 setTimeout(function() {
+                    console.log(`Health bar %s should be ${pokemon1hpcurrent} / ${pokemon1hpinitial}`);
+                    updateHealthBar(pokemon1hpcurrent, pokemon1hpinitial);
                     document.getElementById('pokemon_hp_current').innerHTML = pokemon1hpcurrent;
                 }, 12000);
             }
@@ -681,7 +711,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon2stats[impactedStatD] = 8; textField.textContent='Nothing happened!';
         } else{
             textField.textContent=`${pokemonChoices[userPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} rose!`;
-        }; console.log (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]);
+        }; console.log (`Opponent's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]}`);
 
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'opponent') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
@@ -703,7 +733,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
         } else {
             textField.textContent=`${pokemonChoices[opponentPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} fell!`;
         }
-        } console.log (pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]);
+        } console.log (`User's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD]}`);
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'physical') {
         let _attack = pokemonChoices[userPokemon].stats.attack * (pokemon2stats.attackMultiplierN/pokemon2stats.attackMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.defense * (pokemon1stats.defenseMultiplierN/pokemon1stats.defenseMultiplierD);
@@ -715,7 +745,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon1hpcurrent = Math.max(pokemon1hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
-        }; console.log(`${_damage} damage dealt by opponent, new HP should be ${pokemon1hpcurrent}`);
+        }; console.log(`${_damage} damage dealt by opponent, new hp is ${pokemon1hpcurrent}`);
 
     } else if(pokemonChoices[userPokemon].moves[moveIndex].category === 'special') {
         let _attack = pokemonChoices[userPokemon].stats.special * (pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD);
@@ -728,7 +758,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon1hpcurrent = Math.max(pokemon1hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
-        }; console.log(`${_damage} damage dealt by opponent, new HP should be ${pokemon1hpcurrent}`);
+        }; console.log(`${_damage} damage dealt by opponent, new hp is ${pokemon1hpcurrent}`);
     } 
 }
 
