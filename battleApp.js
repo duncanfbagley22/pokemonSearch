@@ -329,39 +329,77 @@ let typeChart = {
 // Get Pokemon Names and IDs //
 //const pokemon1name = prompt("Select pokemon 1: machop, squirtle, diglett, or dratini");
 //const pokemon2name = prompt("Select pokemon 2: machop, squirtle, diglett, or dratini");
-const pokemon1name = 'dratini';
-const pokemon2name = 'squirtle';
-
+let pokemon1name;
+let pokemon2name;
 let pokemon1id;
 let pokemon2id;
+let pokemon1hpbase, pokemon1attackbase, pokemon1defensebase, pokemon1speedbase, pokemon1specialbase, pokemon1Back, pokemon1Front, moveVariables;
+let pokemon2hpbase, pokemon2attackbase, pokemon2defensebase, pokemon2speedbase, pokemon2specialbase, pokemon2Back, pokemon2Front, moveVariables2;
+let pokemon1move1, pokemon1move2, pokemon1move3, pokemon1move4, pokemon2move1, pokemon2move2, pokemon2move3, pokemon2move4
 
-if (pokemon1name === 'machop') {pokemon1id = 0} else if (pokemon1name === 'squirtle') {pokemon1id = 1} else if (pokemon1name === 'diglett') {pokemon1id = 2} else if (pokemon1name === 'dratini') {pokemon1id = 3};
-if (pokemon2name === 'machop') {pokemon2id = 0} else if (pokemon2name === 'squirtle') {pokemon2id = 1} else if (pokemon2name === 'diglett') {pokemon2id = 2} else if (pokemon2name === 'dratini') {pokemon2id = 3};
+const firstPokemonButton = document.querySelectorAll(".select-pokemon-list");
+const secondPokemonButton = document.querySelectorAll(".select-pokemon-list2");
+const inputButton = document.getElementById('input_button');
+
+firstPokemonButton.forEach(pokemon => {
+    pokemon.addEventListener("click", function () {
+        pokemon1name = this.id;
+        if (pokemon1name === 'machop') {pokemon1id = 0} else if (pokemon1name === 'squirtle') {pokemon1id = 1} else if (pokemon1name === 'diglett') {pokemon1id = 2} else if (pokemon1name === 'dratini') {pokemon1id = 3};
+        pokemon1hpbase = pokemonChoices[pokemon1id].stats.hp;
+        pokemon1attackbase = pokemonChoices[pokemon1id].stats.attack;
+        pokemon1defensebase = pokemonChoices[pokemon1id].stats.defense;
+        pokemon1speedbase = pokemonChoices[pokemon1id].stats.speed;
+        pokemon1specialbase = pokemonChoices[pokemon1id].stats.special;
+        pokemon1Back = pokemonChoices[pokemon1id].back_sprite;
+        pokemon1Front = pokemonChoices[pokemon1id].front_sprite;
+        pokemon1move1 = pokemonChoices[pokemon1id].moves.move1.name;
+        pokemon1move2 = pokemonChoices[pokemon1id].moves.move2.name;
+        pokemon1move3 = pokemonChoices[pokemon1id].moves.move3.name;
+        pokemon1move4 = pokemonChoices[pokemon1id].moves.move4.name;
+        moveVariables = {
+            "pokemon1move1": pokemon1move1,
+            "pokemon1move2": pokemon1move2,
+            "pokemon1move3": pokemon1move3,
+            "pokemon1move4": pokemon1move4,
+            "pokemon1name": pokemon1name
+        };
+        document.getElementById('pokemon1').style.visibility = 'hidden';
+        document.getElementById('pokemon2').style.visibility = 'visible';
+
+    })
+})
+
+secondPokemonButton.forEach(pokemon => {
+    pokemon.addEventListener("click", function () {
+        pokemon2name = this.id;
+        pokemon2name = pokemon2name.substring(0, pokemon2name.length - 1)
+        if (pokemon2name === 'machop') {pokemon2id = 0} else if (pokemon2name === 'squirtle') {pokemon2id = 1} else if (pokemon2name === 'diglett') {pokemon2id = 2} else if (pokemon2name === 'dratini') {pokemon2id = 3}
+        pokemon2hpbase = pokemonChoices[pokemon2id].stats.hp;
+        pokemon2attackbase = pokemonChoices[pokemon2id].stats.attack;
+        pokemon2defensebase = pokemonChoices[pokemon2id].stats.defense;
+        pokemon2speedbase = pokemonChoices[pokemon2id].stats.speed;
+        pokemon2specialbase = pokemonChoices[pokemon2id].stats.special;
+        pokemon2Back = pokemonChoices[pokemon2id].back_sprite;
+        pokemon2Front = pokemonChoices[pokemon2id].front_sprite;
+        pokemon2move1 = pokemonChoices[pokemon2id].moves.move1.name;
+        pokemon2move2 = pokemonChoices[pokemon2id].moves.move2.name;
+        pokemon2move3 = pokemonChoices[pokemon2id].moves.move3.name;
+        pokemon2move4 = pokemonChoices[pokemon2id].moves.move4.name;
+        moveVariables2 = {
+            "pokemon2move1": pokemon2move1,
+            "pokemon2move2": pokemon2move2,
+            "pokemon2move3": pokemon2move3,
+            "pokemon2move4": pokemon2move4,
+            "pokemon2name": pokemon2name
+        };
+        document.getElementById('pokemon2').style.visibility = 'hidden';
+        inputButton.style.visibility = 'visible';
+
+    })
+})
 
 // Set initial pokemon stat bases //
 const level = 15;
-const pokemon1hpbase = pokemonChoices[pokemon1id].stats.hp;
-const pokemon1attackbase = pokemonChoices[pokemon1id].stats.attack;
-const pokemon1defensebase = pokemonChoices[pokemon1id].stats.defense;
-const pokemon1speedbase = pokemonChoices[pokemon1id].stats.speed;
-const pokemon1specialbase = pokemonChoices[pokemon1id].stats.special;
-const pokemon1Back = pokemonChoices[pokemon1id].back_sprite;
-const pokemon1Front = pokemonChoices[pokemon1id].front_sprite;
-const pokemon1move1 = pokemonChoices[pokemon1id].moves.move1.name;
-const pokemon1move2 = pokemonChoices[pokemon1id].moves.move2.name;
-const pokemon1move3 = pokemonChoices[pokemon1id].moves.move3.name;
-const pokemon1move4 = pokemonChoices[pokemon1id].moves.move4.name;
-const pokemon2hpbase = pokemonChoices[pokemon2id].stats.hp;
-const pokemon2attackbase = pokemonChoices[pokemon2id].stats.attack;
-const pokemon2defensebase = pokemonChoices[pokemon2id].stats.defense;
-const pokemon2speedbase = pokemonChoices[pokemon2id].stats.speed;
-const pokemon2specialbase = pokemonChoices[pokemon2id].stats.special;
-const pokemon2Back = pokemonChoices[pokemon2id].back_sprite;
-const pokemon2Front = pokemonChoices[pokemon2id].front_sprite;
-const pokemon2move1 = pokemonChoices[pokemon2id].moves.move1.name;
-const pokemon2move2 = pokemonChoices[pokemon2id].moves.move2.name;
-const pokemon2move3 = pokemonChoices[pokemon2id].moves.move3.name;
-const pokemon2move4 = pokemonChoices[pokemon2id].moves.move4.name;
 
 // Set user pokemon EVs //
 let pokemon1evs = {
@@ -441,30 +479,36 @@ function calculateStat (base, iv, ev, level) {
     return Math.floor(.01*(2*base + iv + Math.floor(0.25*ev))*level) + 5
 }
 
-let pokemon1hp, pokemon1attack, pokemon1defense, pokemon1special, pokemon1speed, pokemon2hp, pokemon2attack, pokemon2defense, pokemon2special, pokemon2speed;
+let pokemon1hp, pokemon1attack, pokemon1defense, pokemon1special, pokemon1speed, pokemon2hp, pokemon2attack, pokemon2defense, pokemon2special, pokemon2speed, pokemon1attackinitial, pokemon1defenseinitial, pokemon1specialinitial, pokemon1speedinitial, pokemon2attackinitial, pokemon2defenseinitial, pokemon2specialinitial, pokemon2speedinitial, pokemon1hpcurrent, pokemon2hpcurrent, pokemon1hpinitial, pokemon2hpinitial;
 
 // Function to set initial values for both pokemon //
 function setPokemonData () {
         pokemon1hpinitial = calculateHP(pokemon1hpbase, pokemon1ivs.hp, pokemon1evs.hp, level);
         pokemon1hpcurrent = pokemon1hpinitial;
         pokemon1attack = calculateStat(pokemon1attackbase, pokemon1ivs.attack, pokemon1evs.attack, level);
+        pokemon1attackinitial = pokemon1attack;
         pokemon1defense = calculateStat(pokemon1defensebase, pokemon1ivs.defense, pokemon1evs.defense, level);
+        pokemon1defenseinitial = pokemon1defense;
         pokemon1special = calculateStat(pokemon1specialbase, pokemon1ivs.special, pokemon1evs.special, level);
+        pokemon1specialinitial = pokemon1special;
         pokemon1speed = calculateStat(pokemon1speedbase, pokemon1ivs.speed, pokemon1evs.speed, level);
+        pokemon1speedinitial = pokemon1speed;
         pokemon2hpinitial = calculateHP(pokemon2hpbase, pokemon2ivs.hp, pokemon2evs.hp, level);
         pokemon2hpcurrent = pokemon2hpinitial;
         pokemon2attack = calculateStat(pokemon2attackbase, pokemon2ivs.attack, pokemon2evs.attack, level);
+        pokemon2attackinitial = pokemon2attack;
         pokemon2defense = calculateStat(pokemon2defensebase, pokemon2ivs.defense, pokemon2evs.defense, level);
+        pokemon2defenseinitial = pokemon2defense;
         pokemon2special = calculateStat(pokemon2specialbase, pokemon2ivs.special, pokemon2evs.special, level);
+        pokemon2specialinitial = pokemon2special;
         pokemon2speed = calculateStat(pokemon2speedbase, pokemon2ivs.speed, pokemon2evs.speed, level);
+        pokemon2speedinitial = pokemon2speed;
 };
 
 // Populate initial values for each pokemon //
-const inputButton = document.getElementById('input_button');
-const textField = document.getElementById("text-field")
+const textField = document.getElementById("text-field");
 
 inputButton.addEventListener("click", function() {
-    setTimeout(function() {
         setPokemonData();
         document.getElementById('pokemon_name').textContent = pokemon1name.toUpperCase();
         document.getElementById('pokemon_level').textContent = level;
@@ -484,30 +528,8 @@ inputButton.addEventListener("click", function() {
         setTimeout(function() {
             document.getElementById("move-selection").style.visibility = 'visible';
             textField.textContent = '';
-        }, 3000);
-    }, 500);
+        }, 2000);
 });
-
-// Object used to map moves and names //
-const moveVariables = {
-    "pokemon1move1": pokemon1move1,
-    "pokemon1move2": pokemon1move2,
-    "pokemon1move3": pokemon1move3,
-    "pokemon1move4": pokemon1move4,
-    "pokemon2move1": pokemon2move1,
-    "pokemon2move2": pokemon2move2,
-    "pokemon2move3": pokemon2move3,
-    "pokemon2move4": pokemon2move4,
-    "pokemon1name": pokemon1name,
-    "pokemon2name": pokemon2name
-};
-
-/* Function to return the move variable based on a clicked button //
-function getPokemonName(moveVariableName) {
-    const parts = moveVariableName.split("move");
-    const pokemonNameVariable = parts[0] + "name";
-    return pokemonNameVariable;
-}*/
 
 // Function to return the index of a move for a specific pokemon //
 function findMoveIndex(pokemonName, moveName) {
@@ -551,6 +573,15 @@ function updateHealthBar2(currenthp, initialhp) {
 
 moveButtons.forEach(move => {
     move.addEventListener("click", function() {
+        pokemon1attack = pokemon1attackinitial * (pokemon1stats.attackMultiplierN/pokemon1stats.attackMultiplierD);
+        pokemon1defense = pokemon1defenseinitial * (pokemon1stats.defenseMultiplierN/pokemon1stats.defenseMultiplierD);
+        pokemon1special = pokemon1specialinitial * (pokemon1stats.specialMultiplierN/pokemon1stats.specialMultiplierD);
+        pokemon1speed = pokemon1speedinitial * (pokemon1stats.speedMultiplierN/pokemon1stats.speedMultiplierD);
+        pokemon2attack = pokemon2attackinitial * (pokemon2stats.attackMultiplierN/pokemon2stats.attackMultiplierD);
+        pokemon2defense = pokemon2defenseinitial * (pokemon2stats.defenseMultiplierN/pokemon2stats.defenseMultiplierD);
+        pokemon2special = pokemon2specialinitial * (pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD);
+        pokemon2speed = pokemon2speedinitial * (pokemon2stats.speedMultiplierN/pokemon2stats.speedMultiplierD);
+
         setTimeout(function() {
             document.getElementById("move-selection").style.visibility = 'hidden';
         }, 500);
@@ -562,45 +593,66 @@ moveButtons.forEach(move => {
 
         let randForOpponent = Math.floor(Math.random() * 4)+1
         let opponentMoveIndex = 'move' + randForOpponent;
-        let opponentMoveName = moveVariables['pokemon2move' + randForOpponent];
+        let opponentMoveName = moveVariables2['pokemon2move' + randForOpponent];
         let opponentPokemonName = pokemon2name;
-    
-        console.log(`User's hp is ${pokemon1hpcurrent}`);
-        console.log(`Opponent's hp is ${pokemon2hpcurrent}`);
-        console.log(`Move Index: ${moveIndex} Opponent Move Index: ${opponentMoveIndex}`)
-        setTimeout(function() {
+
             if (pokemon1speed >= pokemon2speed) {
                 setTimeout(function() {
                     textField.textContent = `${selectedPokemonName.toUpperCase()} used ${selectedMoveName.toUpperCase()}!`;
                 }, 500);
-                setTimeout(function() {
+                setTimeout(function() {                
                     userMove(moveIndex, pokemon1id, pokemon2id);
                 }, 2000);
                 setTimeout(function() {
-                    updateHealthBar2(pokemon2hpcurrent, pokemon2hpinitial);
-                    textField.textContent = `${opponentPokemonName.toUpperCase()} used ${opponentMoveName.toUpperCase()}!`;
-                }, 6000);
-                setTimeout(function() {
-                    opponentMove(opponentMoveIndex, pokemon2id, pokemon1id);
-                }, 10000);
-                setTimeout(function() {
-                    console.log(`Health bar %s should be ${pokemon1hpcurrent} / ${pokemon1hpinitial}`);
-                    updateHealthBar(pokemon1hpcurrent, pokemon1hpinitial);
-                    document.getElementById('pokemon_hp_current').innerHTML = pokemon1hpcurrent;
-                }, 12000);
+                    if (pokemon2hpcurrent*1===0) {updateHealthBar2(pokemon2hpcurrent, pokemon2hpinitial); textField.textContent = `${opponentPokemonName.toUpperCase()} fainted!`} else {
+                    setTimeout(function() {
+                        updateHealthBar2(pokemon2hpcurrent, pokemon2hpinitial);
+                        textField.textContent = `${opponentPokemonName.toUpperCase()} used ${opponentMoveName.toUpperCase()}!`;
+                    }, 3000);
+                    setTimeout(function() {
+                        opponentMove(opponentMoveIndex, pokemon2id, pokemon1id);
+                    }, 4000);
+                    setTimeout(function() {
+                        updateHealthBar(pokemon1hpcurrent, pokemon1hpinitial);
+                        document.getElementById('pokemon_hp_current').innerHTML = pokemon1hpcurrent;
+                        if (pokemon1hpcurrent*1===0) {textField.textContent = `${selectedPokemonName.toUpperCase()} fainted!`};
+                    }, 8000);};
+                },3000);
             }
             else {
-                textField.textContent = `${opponentPokemonName.toUpperCase()} used ${opponentMoveName.toUpperCase()}!`;
-                opponentMove(moveIndex, pokemon2id, pokemon1id);
-                document.getElementById('pokemon_hp_current').textContent = pokemon1hpcurrent;
-                textField.textContent = `${selectedPokemonName.toUpperCase()} used ${selectedMoveName.toUpperCase()}!`;
-                userMove(moveIndex, pokemon1id, pokemon2id);
+                setTimeout(function() {
+                    textField.textContent = `${opponentPokemonName.toUpperCase()} used ${opponentMoveName.toUpperCase()}!`;
+                }, 500);
+                setTimeout(function() {
+                    opponentMove(opponentMoveIndex, pokemon2id, pokemon1id);
+                }, 2000);
+                setTimeout(function() {
+                if (pokemon1hpcurrent*1===0) {updateHealthBar(pokemon1hpcurrent, pokemon1hpinitial); textField.textContent = `${selectedPokemonName.toUpperCase()} fainted!`} else {
+                    setTimeout(function() {
+                        updateHealthBar(pokemon1hpcurrent, pokemon1hpinitial);
+                        document.getElementById('pokemon_hp_current').textContent = pokemon1hpcurrent;
+                    }, 3000);
+                    setTimeout(function() {
+                        textField.textContent = `${selectedPokemonName.toUpperCase()} used ${selectedMoveName.toUpperCase()}!`;
+                    }, 4000);
+                    setTimeout(function() {
+                        userMove(moveIndex, pokemon1id, pokemon2id);
+                        updateHealthBar2(pokemon2hpcurrent, pokemon2hpinitial);
+                        if (pokemon2hpcurrent*1===0) {textField.textContent = `${opponentPokemonName.toUpperCase()} fainted!`};
+                    }, 8000);};
+                }, 3000);
             }
-        }, 1000);
-        setTimeout(function() {
-            document.getElementById("move-selection").style.visibility = 'visible';
-            textField.textContent = '';
-        }, 13000);
+
+            setTimeout(function() {
+                if (pokemon1hpcurrent*1 > 0 && pokemon2hpcurrent*1 > 0) {
+                textField.textContent = '';
+                document.getElementById("move-selection").style.visibility = 'visible';}
+                else {document.getElementById("move-selection").style.visibility = 'hidden';
+                setTimeout(function() {
+                    textField.textContent = `Reload page to restart!`;
+                }, 5000);
+                }
+            }, 12000);
     });
 });
 
@@ -632,7 +684,7 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
             pokemon1stats[impactedStatD] = 8; textField.textContent='Nothing happened!'
         } else{
             textField.textContent=`${pokemonChoices[userPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} rose!`;
-        }; console.log (`User's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD]}`);
+        };
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'opponent') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
         let impactedStatD = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierD';
@@ -653,7 +705,7 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
         } else {
             textField.textContent=`${pokemonChoices[opponentPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} fell!`;
         }
-        }; console.log (`Opponent's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]}`)
+        }; 
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'physical') {
         let _attack = pokemonChoices[userPokemon].stats.attack * (pokemon1stats.attackMultiplierN/pokemon1stats.attackMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.defense * (pokemon2stats.defenseMultiplierN/pokemon2stats.defenseMultiplierD);
@@ -665,8 +717,8 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
             pokemon2hpcurrent = Math.max(pokemon2hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
+            if (_effectiveness < 1) {textField.textContent=`It's not very effective!`};
         };
-        console.log(`${_damage} damage dealt to opponent, new hp is ${pokemon2hpcurrent}`);
 
     } else if(pokemonChoices[userPokemon].moves[moveIndex].category === 'special') {
         let _attack = pokemonChoices[userPokemon].stats.special * (pokemon1stats.specialMultiplierN/pokemon1stats.specialMultiplierD);
@@ -679,7 +731,8 @@ function userMove (moveIndex, userPokemon, opponentPokemon){
             pokemon2hpcurrent = Math.max(pokemon2hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
-        }; console.log(`${_damage} damage dealt to opponent, new hp is ${pokemon2hpcurrent}`);
+            if (_effectiveness < 1) {textField.textContent=`It's not very effective!`};
+        };
     } 
 }
 
@@ -711,7 +764,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon2stats[impactedStatD] = 8; textField.textContent='Nothing happened!';
         } else{
             textField.textContent=`${pokemonChoices[userPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} rose!`;
-        }; console.log (`Opponent's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon2stats[impactedStatN]/pokemon2stats[impactedStatD]}`);
+        };
 
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'status' && pokemonChoices[userPokemon].moves[moveIndex].target === 'opponent') {
         let impactedStatN = pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat + 'MultiplierN';
@@ -733,7 +786,7 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
         } else {
             textField.textContent=`${pokemonChoices[opponentPokemon].id.toUpperCase()}'s ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat.toUpperCase()} fell!`;
         }
-        } console.log (`User's new ${pokemonChoices[userPokemon].moves[moveIndex].stat_changes.stat} multiplier is ${pokemon1stats[impactedStatN]/pokemon1stats[impactedStatD]}`);
+        } 
     } else if (pokemonChoices[userPokemon].moves[moveIndex].category === 'physical') {
         let _attack = pokemonChoices[userPokemon].stats.attack * (pokemon2stats.attackMultiplierN/pokemon2stats.attackMultiplierD);
         let _defense = pokemonChoices[opponentPokemon].stats.defense * (pokemon1stats.defenseMultiplierN/pokemon1stats.defenseMultiplierD);
@@ -745,7 +798,8 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon1hpcurrent = Math.max(pokemon1hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
-        }; console.log(`${_damage} damage dealt by opponent, new hp is ${pokemon1hpcurrent}`);
+            if (_effectiveness < 1) {textField.textContent=`It's not very effective!`};
+        };
 
     } else if(pokemonChoices[userPokemon].moves[moveIndex].category === 'special') {
         let _attack = pokemonChoices[userPokemon].stats.special * (pokemon2stats.specialMultiplierN/pokemon2stats.specialMultiplierD);
@@ -758,7 +812,8 @@ function opponentMove (moveIndex, userPokemon, opponentPokemon){
             pokemon1hpcurrent = Math.max(pokemon1hpcurrent - _damage, 0);
             if (_critical === 2) {textField.textContent='Critical hit!'};
             if (_effectiveness > 1) {textField.textContent=`It's super effective!`};
-        }; console.log(`${_damage} damage dealt by opponent, new hp is ${pokemon1hpcurrent}`);
+            if (_effectiveness < 1) {textField.textContent=`It's not very effective!`};
+        };
     } 
 }
 

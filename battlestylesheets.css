@@ -112,10 +112,15 @@ body{
     height: var(--itemHeight);
     text-wrap: nowrap;
     border-style: solid;
-    font-size: 20px;
+    font-size: 18px;
     align-content: center;
     justify-items: center;
     font-weight: bold;
+    font-family: PokemonFont;
+}
+
+#input_button{
+    visibility: hidden;
 }
 
 .battle-input-button:hover{
@@ -177,6 +182,77 @@ body{
     visibility: hidden;
 }
 
+.select-pokemon{
+    width: 300px;
+    height: 300px;
+    background-color: white;
+    border-radius: 1;
+    left: 50%;
+    transform: translate(-50%, 30%);
+    position: fixed;
+    display: flex;
+    border-style: solid;
+    flex-direction: column;
+    visibility: visible;
+    padding: 10px;
+}
+
+.select-pokemon h2{
+    font-family: PokemonFont;
+    font-size: 16px;
+}
+
+.select-pokemon img{
+    width: 50px;
+    left: 30%;
+    transform: translate(-100%, -38%);
+    position: absolute;
+}
+
+.select-pokemon-list{
+    flex: 3;
+    height: 25%;
+    border-style: solid;
+    list-style-type: none;
+    width: 90%;
+    left: 0;
+    box-sizing: border-box;
+    align-content: center;
+    font-family: PokemonFont;
+    left: 50%;
+    transform: translateX(5%);
+    font-size: 14px;
+}
+
+.select-pokemon-list:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+#pokemon2{
+    visibility: hidden;
+}
+
+.select-pokemon-list2{
+    flex: 3;
+    height: 25%;
+    border-style: solid;
+    list-style-type: none;
+    width: 90%;
+    left: 0;
+    box-sizing: border-box;
+    align-content: center;
+    font-family: PokemonFont;
+    left: 50%;
+    transform: translateX(5%);
+    font-size: 14px;
+}
+
+.select-pokemon-list2:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+
 .text-field{
     border-style: double;
     border-width: 5px;
@@ -184,12 +260,13 @@ body{
     width: 95%;
     transform: translateX(3%);
     font-family: PokemonFont;
-    font-size: 20px;
+    font-size: 19px;
     line-height: 2;
     text-align: left;
     padding: 5px;
     box-sizing: border-box;
-    padding-top: 0;
+    padding-top: 3px;
+    padding-right: 1px;
 }
 
 .move-selection{
